@@ -55,11 +55,19 @@ uv sync
 #______________________________________________________________________________
 
 [tasks.structure]
-description = "🌲 View the project structure"
+description = "🌲 View the project structure | alias structure"
 quiet = true
 run = """
 
 eza --tree --git-ignore
 
 """
+#______________________________________________________________________________
+
+[shell_alias]
+clean = "mise run clean"
+dev = "mise run dev"
+format = "mise run format"
+setup = "mise run setup"
+structure = "mise run structure"
 #______________________________________________________________________________

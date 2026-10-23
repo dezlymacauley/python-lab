@@ -93,13 +93,21 @@ uv sync
 #______________________________________________________________________________
 
 [tasks.structure]
-description = "🌲 View the project structure"
+description = "🌲 View the project structure | alias structure"
 quiet = true
 run = """
 
 eza --tree --git-ignore
 
 """
+#______________________________________________________________________________
+
+[shell_alias]
+clean = "mise run clean"
+dev = "mise run dev"
+format = "mise run format"
+setup = "mise run setup"
+structure = "mise run structure"
 #______________________________________________________________________________
 ```
 _______________________________________________________________________________
@@ -225,5 +233,18 @@ if __name__ == "__main__":
 ```
 _______________________________________________________________________________
 
+Run this command to see the list of `mise tasks` in your project
+```bash
+mise tasks
+```
 
+You should see an output like this
+```
+Name       Description
+clean      🧼 Delete cache and dependencies | alias = clean
+dev        🐍 Run the program | alias = dev
+format     📜 Run the code formatter on the project | alias = format
+setup      🚀 Setup the project | alias = setup
+structure  🌲 View the project structure | alias structure
+```
 _______________________________________________________________________________
