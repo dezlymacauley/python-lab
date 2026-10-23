@@ -25,17 +25,82 @@ mise use ruff@latest
 ```
 _______________________________________________________________________________
 
+Set the project to use the latest version of `eza` (project structure viewer)
+```bash
+mise use eza@latest
+```
+_______________________________________________________________________________
+
 You should now have a `mise.toml` file in the project
 _______________________________________________________________________________
 
 Update the `mise.toml` file in the project to look like this
 ```toml
 [tools]
+eza = "latest"
 ruff = "latest"
 uv = "latest"
+#______________________________________________________________________________
 
 [settings]
 python.uv_venv_auto = "source"
+
+#______________________________________________________________________________
+
+[tasks.clean]
+description = "🧼 Delete cache and dependencies | alias = clean"
+quiet = true
+run = """
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+"""
+
+#______________________________________________________________________________
+
+[tasks.dev]
+description = "🐍 Run the program | alias = dev"
+quiet = true
+run = """
+python src/main.py
+"""
+#______________________________________________________________________________
+
+[tasks.format]
+description = "📜 Run the code formatter on the project | alias = format"
+quiet = true
+run = """
+
+ruff format .
+
+"""
+#______________________________________________________________________________
+
+[tasks.setup]
+description = "🚀 Setup the project | alias = setup"
+quiet = true
+run = """
+
+# Ensure that this is a clean build of the virtual environment
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+
+# Rebuild the the virtual environment and install the dependencies
+uv sync
+
+"""
+#______________________________________________________________________________
+
+[tasks.structure]
+description = "🌲 View the project structure"
+quiet = true
+run = """
+
+eza --tree --git-ignore
+
+"""
+#______________________________________________________________________________
 ```
 _______________________________________________________________________________
 
@@ -134,4 +199,31 @@ that was set by uv.
 ```
 .venv/bin/python
 ```
+_______________________________________________________________________________
+
+Create an `src` directory for your Python source code
+```bash
+mkdir src
+```
+_______________________________________________________________________________
+
+Create a `main.py` file in the `src` directory
+```bash
+touch src/main.py 
+```
+_______________________________________________________________________________
+
+Add this to the `main.py` file
+```python
+def main():
+    print()
+    print("Python Project: mise and uv")
+    print()
+
+if __name__ == "__main__":
+    main()
+```
+_______________________________________________________________________________
+
+
 _______________________________________________________________________________

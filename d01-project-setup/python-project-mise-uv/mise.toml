@@ -1,6 +1,65 @@
 [tools]
+eza = "latest"
 ruff = "latest"
 uv = "latest"
+#______________________________________________________________________________
 
 [settings]
 python.uv_venv_auto = "source"
+
+#______________________________________________________________________________
+
+[tasks.clean]
+description = "🧼 Delete cache and dependencies | alias = clean"
+quiet = true
+run = """
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+"""
+
+#______________________________________________________________________________
+
+[tasks.dev]
+description = "🐍 Run the program | alias = dev"
+quiet = true
+run = """
+python src/main.py
+"""
+#______________________________________________________________________________
+
+[tasks.format]
+description = "📜 Run the code formatter on the project | alias = format"
+quiet = true
+run = """
+
+ruff format .
+
+"""
+#______________________________________________________________________________
+
+[tasks.setup]
+description = "🚀 Setup the project | alias = setup"
+quiet = true
+run = """
+
+# Ensure that this is a clean build of the virtual environment
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+
+# Rebuild the the virtual environment and install the dependencies
+uv sync
+
+"""
+#______________________________________________________________________________
+
+[tasks.structure]
+description = "🌲 View the project structure"
+quiet = true
+run = """
+
+eza --tree --git-ignore
+
+"""
+#______________________________________________________________________________
