@@ -110,8 +110,8 @@ cd -
 """
 #______________________________________________________________________________
 
-[tasks.view-structure]
-description = "🌲 View the project structure | alias = view-structure"
+[tasks.structure]
+description = "🌲 View the project structure | alias = structure"
 quiet = true
 run = """
 
@@ -125,7 +125,7 @@ clean = "mise run clean"
 format = "mise run format"
 run = "python src/main.py"
 setup = "mise run setup"
-view-structure = "mise run view-structure"
+structure = "mise run structure"
 #______________________________________________________________________________
 ```
 _______________________________________________________________________________
@@ -321,15 +321,20 @@ mise tasks
 
 You should see an output like this
 ```
-Name            Description
-clean           🧼 Delete cache and dependencies | alias = clean
-format          📜 Run the code formatter on the project | alias = format
-setup           🚀 Setup the project | alias = setup
-view-structure  🌲 View the project structure | alias = view-structure
+Name       Description
+clean      🧼 Delete cache and dependencies | alias = clean
+format     📜 Run the code formatter on the project | alias = format
+setup      🚀 Setup the project | alias = setup
+structure  🌲 View the project structure | alias = structure
 ```
 _______________________________________________________________________________
 
-This is the project structure
+To view the project structure, just run this command:
+```bash
+structure
+```
+
+This should be the project structure
 ```
 .
 ├── mise.toml

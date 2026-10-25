@@ -52,8 +52,8 @@ cd -
 """
 #______________________________________________________________________________
 
-[tasks.view-structure]
-description = "🌲 View the project structure | alias = view-structure"
+[tasks.structure]
+description = "🌲 View the project structure | alias = structure"
 quiet = true
 run = """
 
@@ -64,8 +64,9 @@ eza --tree --git-ignore
 
 [shell_alias]
 clean = "mise run clean"
+dev = "python src/main.py"
 format = "mise run format"
 run = "python src/main.py"
 setup = "mise run setup"
-view-structure = "mise run view-structure"
+structure = "mise run structure"
 #______________________________________________________________________________
