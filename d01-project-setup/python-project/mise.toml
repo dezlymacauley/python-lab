@@ -1,3 +1,7 @@
+[env]
+PROJECT_PYTHON_VERSION = "3.15.1" 
+#______________________________________________________________________________
+
 [tools]
 eza = "latest"
 ruff = "latest"
@@ -16,16 +20,6 @@ run = """
 rm -rf __pycache__
 rm -rf .ruff_cache
 rm -rf .venv
-
-"""
-#______________________________________________________________________________
-
-[tasks.dev]
-description = "🐍 Run the program | alias = dev"
-quiet = true
-run = """
-
-python src/main.py
 
 """
 #______________________________________________________________________________
@@ -59,7 +53,7 @@ cd -
 #______________________________________________________________________________
 
 [tasks.view-structure]
-description = "🌲 View the project structure | alias view-structure"
+description = "🌲 View the project structure | alias = view-structure"
 quiet = true
 run = """
 
@@ -70,8 +64,8 @@ eza --tree --git-ignore
 
 [shell_alias]
 clean = "mise run clean"
-dev = "mise run dev"
 format = "mise run format"
+run = "python src/main.py"
 setup = "mise run setup"
 view-structure = "mise run view-structure"
 #______________________________________________________________________________

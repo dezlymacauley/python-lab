@@ -31,11 +31,35 @@ mise use eza@latest
 ```
 _______________________________________________________________________________
 
-You should now have a `mise.toml` file in the project
+Decide which version of Python you want to use in your workspace. 
+
+Please note that all of the programs in your Python workspace will use this
+Python version.
+_______________________________________________________________________________
+
+You can use `mise` to check what is the version number 
+of the latest available Python that you can use in a project.
+```bash
+mise latest python
+```
+_______________________________________________________________________________
+
+If you want to view a list of valid Python versions that you can use,
+run this command:
+```bash
+mise ls-remote python
+```
+_______________________________________________________________________________
+
+For this guide, I'll be using Python `3.15.1`
 _______________________________________________________________________________
 
 Update the `mise.toml` file in the project to look like this
 ```toml
+[env]
+PROJECT_PYTHON_VERSION = "3.15.1" 
+#______________________________________________________________________________
+
 [tools]
 eza = "latest"
 ruff = "latest"
@@ -54,16 +78,6 @@ run = """
 rm -rf __pycache__
 rm -rf .ruff_cache
 rm -rf .venv
-
-"""
-#______________________________________________________________________________
-
-[tasks.dev]
-description = "🐍 Run the program | alias = dev"
-quiet = true
-run = """
-
-python src/main.py
 
 """
 #______________________________________________________________________________
@@ -97,7 +111,7 @@ cd -
 #______________________________________________________________________________
 
 [tasks.view-structure]
-description = "🌲 View the project structure | alias view-structure"
+description = "🌲 View the project structure | alias = view-structure"
 quiet = true
 run = """
 
@@ -108,8 +122,9 @@ eza --tree --git-ignore
 
 [shell_alias]
 clean = "mise run clean"
-dev = "mise run dev"
+dev = "python src/main.py"
 format = "mise run format"
+run = "python src/main.py"
 setup = "mise run setup"
 view-structure = "mise run view-structure"
 #______________________________________________________________________________
@@ -150,7 +165,7 @@ _______________________________________________________________________________
 
 Intialize the project usinge `uv`
 ```bash
-uv init --bare -p "$(mise latest python)"
+uv init --bare -p "$PROJECT_PYTHON_VERSION"
 ```
 
 #### Note:
@@ -164,7 +179,7 @@ _______________________________________________________________________________
 
 Create a `.python-version` file
 ```bash
-echo "$(mise latest python)" > .python-version
+echo "$PROJECT_PYTHON_VERSION" > .python-version
 ```
 
 #### Note:
@@ -173,7 +188,7 @@ _______________________________________________________________________________
 
 Create a Python Virtual Environment
 ```bash
-uv venv -p "$(cat .python-version)"
+uv venv -p "$PROJECT_PYTHON_VERSION"
 ```
 _______________________________________________________________________________
 
@@ -247,9 +262,14 @@ You should see an output like this
 ```
 Name            Description
 clean           🧼 Delete cache and dependencies | alias = clean
-dev             🐍 Run the program | alias = dev
 format          📜 Run the code formatter on the project | alias = format
 setup           🚀 Setup the project | alias = setup
-view-structure  🌲 View the project structure | alias view-structure
+view-structure  🌲 View the project structure | alias = view-structure
+```
+_______________________________________________________________________________
+
+To run the project, all you need is one command:
+```bash
+run
 ```
 _______________________________________________________________________________

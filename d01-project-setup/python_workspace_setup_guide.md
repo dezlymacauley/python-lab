@@ -122,8 +122,8 @@ eza --tree --git-ignore
 
 [shell_alias]
 clean = "mise run clean"
-dev = "python src/main.py"
 format = "mise run format"
+run = "python src/main.py"
 setup = "mise run setup"
 view-structure = "mise run view-structure"
 #______________________________________________________________________________
@@ -348,12 +348,12 @@ This is the project structure
 ```
 _______________________________________________________________________________
 
-To run a program, simply navigate to the directory use the `dev` command.
+To run a program, simply navigate to the directory use the `run` command.
 
 E.g. To run the program `d01`
 
 ```bash
 cd programs/d01
-dev
+run
 ```
 _______________________________________________________________________________

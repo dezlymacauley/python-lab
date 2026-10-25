@@ -2,7 +2,24 @@ version = 1
 revision = 5
 requires-python = ">=3.15.1"
 
+[manifest]
+members = [
+    "d01",
+    "d02",
+    "d02-core-syntax",
+]
+
 [[package]]
-name = "python-workspace"
+name = "d01"
+version = "0.1.0"
+source = { virtual = "programs/d01" }
+
+[[package]]
+name = "d02"
+version = "0.1.0"
+source = { virtual = "programs/d02" }
+
+[[package]]
+name = "d02-core-syntax"
 version = "0.1.0"
 source = { virtual = "." }
