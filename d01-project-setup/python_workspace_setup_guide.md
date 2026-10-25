@@ -31,11 +31,35 @@ mise use eza@latest
 ```
 _______________________________________________________________________________
 
-You should now have a `mise.toml` file in the project
+Decide which version of Python you want to use in your workspace. 
+
+Please note that all of the programs in your Python workspace will use this
+Python version.
+_______________________________________________________________________________
+
+You can use `mise` to check what is the version number 
+of the latest available Python that you can use in a project.
+```bash
+mise latest python
+```
+_______________________________________________________________________________
+
+If you want to view a list of valid Python versions that you can use,
+run this command:
+```bash
+mise ls-remote python
+```
+_______________________________________________________________________________
+
+For this guide, I'll be using Python `3.15.1`
 _______________________________________________________________________________
 
 Update the `mise.toml` file in the project to look like this
 ```toml
+[env]
+WORKSPACE_PYTHON_VERSION = "3.15.1" 
+#______________________________________________________________________________
+
 [tools]
 eza = "latest"
 ruff = "latest"
@@ -139,7 +163,7 @@ _______________________________________________________________________________
 
 Intialize the project usinge `uv`
 ```bash
-uv init --bare -p "$(mise latest python)"
+uv init --bare -p "$WORKSPACE_PYTHON_VERSION"
 ```
 
 #### Note:
@@ -174,16 +198,17 @@ _______________________________________________________________________________
 
 Create a `.python-version` file
 ```bash
-echo "$(mise latest python)" > .python-version
+echo "$WORKSPACE_PYTHON_VERSION" > .python-version
 ```
 
 #### Note:
-- This file will be used by `uv` to create a Python Virtual Environment
+- This file will be used by `uv` to create a Python Virtual Environment,
+when the `uv sync` command is used later in this guide.
 _______________________________________________________________________________
 
 Create a Python Virtual Environment
 ```bash
-uv venv -p "$(cat .python-version)"
+uv venv -p "$WORKSPACE_PYTHON_VERSION"
 ```
 _______________________________________________________________________________
 
@@ -236,7 +261,6 @@ and use the same Python Virtual enviroment.
 So the first thing to do is to get the specific version of Python that was
 recorded in your `.python-version` file
 
-For this guide, I used Python version `3.15.1`
 _______________________________________________________________________________
 
 This is how to add the first program, `d01`
