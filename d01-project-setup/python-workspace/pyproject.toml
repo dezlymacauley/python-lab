@@ -1,0 +1,10 @@
+[project]
+name = "python-workspace"
+version = "0.1.0"
+requires-python = ">=3.15.1"
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["programs/*"]
