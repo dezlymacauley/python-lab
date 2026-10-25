@@ -1,15 +1,15 @@
-# mise uv Python Project Setup Guide
+# Python Project Setup Guide
 _______________________________________________________________________________
 
 Create the project directory
 ```bash
-mkdir mise-uv-python-project
+mkdir python-project
 ```
 _______________________________________________________________________________
 
 Enter the project directory
 ```bash
-cd mise-uv-python-project
+cd python-project
 ```
 _______________________________________________________________________________
 
@@ -229,7 +229,7 @@ Add this to the `main.py` file
 ```python
 def main():
     print()
-    print("mise uv Python Project")
+    print("Python Project")
     print()
 
 

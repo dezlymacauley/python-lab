@@ -1,6 +1,6 @@
 def main():
     print()
-    print("mise uv Python Project")
+    print("Python Project")
     print()
 
 
