@@ -111,7 +111,7 @@ cd -
 #______________________________________________________________________________
 
 [tasks.view-structure]
-description = "🌲 View the project structure | alias view-structure"
+description = "🌲 View the project structure | alias = view-structure"
 quiet = true
 run = """
 
@@ -122,6 +122,7 @@ eza --tree --git-ignore
 
 [shell_alias]
 clean = "mise run clean"
+dev = "python src/main.py"
 format = "mise run format"
 setup = "mise run setup"
 view-structure = "mise run view-structure"
@@ -161,7 +162,7 @@ line-length = 80
 ```
 _______________________________________________________________________________
 
-Intialize the project usinge `uv`
+Intialize the workspace usinge `uv`
 ```bash
 uv init --bare -p "$WORKSPACE_PYTHON_VERSION"
 ```
@@ -268,10 +269,10 @@ This is how to add the first program, `d01`
 mkdir programs/d01
 
 cd programs/d01
-    uv init --bare -p 3.15.1
+    uv init --bare -p "$WORKSPACE_PYTHON_VERSION"
     mkdir src
     touch src/main.py
-cd ..
+cd ../..
 ```
 _______________________________________________________________________________
 
@@ -279,25 +280,32 @@ This is how to add the second program, `d02`
 ```bash
 mkdir programs/d02
 
-cd programs/d01
-    uv init --bare -p 3.15.1
+cd programs/d02
+    uv init --bare -p "$WORKSPACE_PYTHON_VERSION"
     mkdir src
     touch src/main.py
-cd ..
+cd ../..
 ```
 _______________________________________________________________________________
 
-Create a `main.py` file in the `src` directory
-```bash
-touch src/main.py 
-```
-_______________________________________________________________________________
-
-Add this to the `main.py` file
+Add this to the `programs/d01/src/main.py` file
 ```python
 def main():
     print()
-    print("Python Project")
+    print("This is d01")
+    print()
+
+
+if __name__ == "__main__":
+    main()
+```
+_______________________________________________________________________________
+
+Add this to the `programs/d02/src/main.py` file
+```python
+def main():
+    print()
+    print("This is d02")
     print()
 
 
@@ -317,6 +325,35 @@ Name            Description
 clean           🧼 Delete cache and dependencies | alias = clean
 format          📜 Run the code formatter on the project | alias = format
 setup           🚀 Setup the project | alias = setup
-view-structure  🌲 View the project structure | alias view-structure
+view-structure  🌲 View the project structure | alias = view-structure
+```
+_______________________________________________________________________________
+
+This is the project structure
+```
+.
+├── mise.toml
+├── programs
+│   ├── d01
+│   │   ├── pyproject.toml
+│   │   └── src
+│   │       └── main.py
+│   └── d02
+│       ├── pyproject.toml
+│       └── src
+│           └── main.py
+├── pyproject.toml
+├── ruff.toml
+└── uv.lock
+```
+_______________________________________________________________________________
+
+To run a program, simply navigate to the directory use the `dev` command.
+
+E.g. To run the program `d01`
+
+```bash
+cd programs/d01
+dev
 ```
 _______________________________________________________________________________
