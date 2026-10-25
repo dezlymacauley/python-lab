@@ -6,25 +6,27 @@ uv = "latest"
 
 [settings]
 python.uv_venv_auto = "source"
-
 #______________________________________________________________________________
 
 [tasks.clean]
 description = "🧼 Delete cache and dependencies | alias = clean"
 quiet = true
 run = """
+
 rm -rf __pycache__
 rm -rf .ruff_cache
 rm -rf .venv
-"""
 
+"""
 #______________________________________________________________________________
 
 [tasks.dev]
 description = "🐍 Run the program | alias = dev"
 quiet = true
 run = """
+
 python src/main.py
+
 """
 #______________________________________________________________________________
 
@@ -50,12 +52,14 @@ rm -rf .venv
 
 # Rebuild the the virtual environment and install the dependencies
 uv sync
+cd ..
+cd -
 
 """
 #______________________________________________________________________________
 
-[tasks.structure]
-description = "🌲 View the project structure | alias structure"
+[tasks.view-structure]
+description = "🌲 View the project structure | alias view-structure"
 quiet = true
 run = """
 
@@ -69,5 +73,5 @@ clean = "mise run clean"
 dev = "mise run dev"
 format = "mise run format"
 setup = "mise run setup"
-structure = "mise run structure"
+view-structure = "mise run view-structure"
 #______________________________________________________________________________

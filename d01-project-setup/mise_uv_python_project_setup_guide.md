@@ -1,15 +1,15 @@
-# Python Project Setup Guide (mise and uv)
+# mise uv Python Project Setup Guide
 _______________________________________________________________________________
 
 Create the project directory
 ```bash
-mkdir python-project-mise-uv
+mkdir mise-uv-python-project
 ```
 _______________________________________________________________________________
 
 Enter the project directory
 ```bash
-cd python-project-mise-uv
+cd mise-uv-python-project
 ```
 _______________________________________________________________________________
 
@@ -44,25 +44,27 @@ uv = "latest"
 
 [settings]
 python.uv_venv_auto = "source"
-
 #______________________________________________________________________________
 
 [tasks.clean]
 description = "🧼 Delete cache and dependencies | alias = clean"
 quiet = true
 run = """
+
 rm -rf __pycache__
 rm -rf .ruff_cache
 rm -rf .venv
-"""
 
+"""
 #______________________________________________________________________________
 
 [tasks.dev]
 description = "🐍 Run the program | alias = dev"
 quiet = true
 run = """
+
 python src/main.py
+
 """
 #______________________________________________________________________________
 
@@ -88,12 +90,14 @@ rm -rf .venv
 
 # Rebuild the the virtual environment and install the dependencies
 uv sync
+cd ..
+cd -
 
 """
 #______________________________________________________________________________
 
-[tasks.structure]
-description = "🌲 View the project structure | alias structure"
+[tasks.view-structure]
+description = "🌲 View the project structure | alias view-structure"
 quiet = true
 run = """
 
@@ -107,7 +111,7 @@ clean = "mise run clean"
 dev = "mise run dev"
 format = "mise run format"
 setup = "mise run setup"
-structure = "mise run structure"
+view-structure = "mise run view-structure"
 #______________________________________________________________________________
 ```
 _______________________________________________________________________________
@@ -178,7 +182,7 @@ Activate the Python Virtual Environment
 ```sh
 uv sync
 cd ..
-cd python-project-mise-uv
+cd -
 ```
 
 #### Note
@@ -225,8 +229,9 @@ Add this to the `main.py` file
 ```python
 def main():
     print()
-    print("Python Project: mise and uv")
+    print("mise uv Python Project")
     print()
+
 
 if __name__ == "__main__":
     main()
@@ -240,11 +245,11 @@ mise tasks
 
 You should see an output like this
 ```
-Name       Description
-clean      🧼 Delete cache and dependencies | alias = clean
-dev        🐍 Run the program | alias = dev
-format     📜 Run the code formatter on the project | alias = format
-setup      🚀 Setup the project | alias = setup
-structure  🌲 View the project structure | alias structure
+Name            Description
+clean           🧼 Delete cache and dependencies | alias = clean
+dev             🐍 Run the program | alias = dev
+format          📜 Run the code formatter on the project | alias = format
+setup           🚀 Setup the project | alias = setup
+view-structure  🌲 View the project structure | alias view-structure
 ```
 _______________________________________________________________________________

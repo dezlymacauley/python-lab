@@ -1,7 +1,8 @@
 def main():
     print()
-    print("Python Project: mise and uv")
+    print("mise uv Python Project")
     print()
+
 
 if __name__ == "__main__":
     main()
