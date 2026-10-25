@@ -232,12 +232,34 @@ which I will call `d01` and `d02`
 
 All of the programs in the workspace will share the same Python version,
 and use the same Python Virtual enviroment.
+
+So the first thing to do is to get the specific version of Python that was
+recorded in your `.python-version` file
+
+For this guide, I used Python version `3.15.1`
 _______________________________________________________________________________
 
 This is how to add the first program, `d01`
-
 ```bash
-mkdir -p programs/d01
+mkdir programs/d01
+
+cd programs/d01
+    uv init --bare -p 3.15.1
+    mkdir src
+    touch src/main.py
+cd ..
+```
+_______________________________________________________________________________
+
+This is how to add the second program, `d02`
+```bash
+mkdir programs/d02
+
+cd programs/d01
+    uv init --bare -p 3.15.1
+    mkdir src
+    touch src/main.py
+cd ..
 ```
 _______________________________________________________________________________
 
