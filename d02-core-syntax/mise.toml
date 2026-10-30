@@ -57,7 +57,7 @@ description = "🌲 View the project structure | alias = structure"
 quiet = true
 run = """
 
-eza --tree --git-ignore
+eza --tree --git-ignore --all
 
 """
 #______________________________________________________________________________
