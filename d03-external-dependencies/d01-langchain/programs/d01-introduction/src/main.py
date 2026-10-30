@@ -6,6 +6,7 @@ import os
 # exposing the characters.
 from getpass import getpass
 
+from pathlib import Path
 # ______________________________________________________________________________
 
 # SECTION: External Dependencies
@@ -71,6 +72,15 @@ def main():
 
     response = model.invoke("Why do parrots talk?")
     print(f"{Fore.CYAN}Response from model: {Style.RESET_ALL}{response}")
+
+    # _________________________________________________________________________
+    
+    # SUB_SECTION: 4 => Process the document
+
+
+
+
+
 
     # _________________________________________________________________________
 
