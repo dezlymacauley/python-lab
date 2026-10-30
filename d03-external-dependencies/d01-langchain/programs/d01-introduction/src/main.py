@@ -21,6 +21,12 @@ from google import genai
 
 from langchain.chat_models import init_chat_model
 
+from langchain_community.document_loaders import TextLoader
+from langchain_core.vectorstores import InMemoryVectorStore
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+
 # ______________________________________________________________________________
 
 
@@ -65,7 +71,6 @@ def main():
     model = init_chat_model(
         model="gemini-3.6-flash",
         model_provider="google_genai",
-        temperature=0, # This makes the model's responses less random
         max_retries=2,
         timeout=20,
     )
@@ -74,11 +79,45 @@ def main():
     print(f"{Fore.CYAN}Response from model: {Style.RESET_ALL}{response}")
 
     # _________________________________________________________________________
-    
+
     # SUB_SECTION: 4 => Process the document
 
+    changelog_path = (
+        Path(__file__).resolve().parent.parent
+        / "data"
+        / "forge"
+        / "CHANGELOG.txt"
+    )
 
+    documents = TextLoader(str(changelog_path), encoding="utf-8").load()
 
+    # Everything below is the screenshot, except the embeddings class
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=350,
+        chunk_overlap=60,
+    )
+
+    chunks = splitter.split_documents(documents)
+
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="gemini-embedding-001",
+    )
+
+    vector_store = InMemoryVectorStore(embedding=embeddings)
+    vector_store.add_documents(chunks)
+
+    retriever = vector_store.as_retriever(
+        search_kwargs={"k": 4},
+    )
+
+    print(f"Documents loaded: {len(documents)}")
+    print(f"Chunks created: {len(chunks)}")
+    print(chunks[0].metadata)
+    print(documents[0].metadata)
+    print(documents[0].page_content[:300])
+
+    # _________________________________________________________________________
+    
 
 
 
