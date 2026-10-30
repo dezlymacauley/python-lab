@@ -1,0 +1,59 @@
+# SECTION: Standard Library Imports
+
+import os
+
+# This allows you to type or paste an API key into the terminal without
+# exposing the characters.
+from getpass import getpass
+
+# ______________________________________________________________________________
+
+# SECTION: External Dependencies
+
+# Allows Python to load environment variables that are declared
+# in the `.env` file, into the environment
+from dotenv import load_dotenv
+
+from colorama import Fore, Style
+# ______________________________________________________________________________
+
+
+def main():
+
+    # _________________________________________________________________________
+
+    # SUB_SECTION: 1 => Load the environment variables
+
+    # This loads the environment variables
+    # `override=True` ensures that environment variables
+    # declared in the `.env`
+    load_dotenv(override=True)
+
+    os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY", "")
+
+    if not os.environ["GEMINI_API_KEY"]:
+        os.environ["GEMINI_API_KEY"] = getpass("Enter Gemini API key:")
+    else:
+        print(
+            f"{Fore.GREEN}Gemini API key loaded from environment variable.{Style.RESET_ALL}"
+        )
+
+    # _________________________________________________________________________
+
+    # SUB_SECTION: 2 => Use the model
+
+    from langchain.chat_models import init_chat_model
+
+    model = init_chat_model(
+        model="gemini-3.8-flash", model_provider="google_genai"
+    )
+
+    response = model.invoke("Why do parrots talk?")
+
+    print(f"{Fore.CYAN}Response from model: {Style.RESET_ALL}{response}")
+
+    # _________________________________________________________________________
+
+
+if __name__ == "__main__":
+    main()
