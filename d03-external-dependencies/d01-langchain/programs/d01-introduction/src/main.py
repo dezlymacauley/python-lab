@@ -64,6 +64,7 @@ def main():
     model = init_chat_model(
         model="gemini-3.6-flash",
         model_provider="google_genai",
+        temperature=0, # This makes the model's responses less random
         max_retries=2,
         timeout=20,
     )
