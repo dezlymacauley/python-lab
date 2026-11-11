@@ -25,8 +25,6 @@ def main():
     # load all of variables from the file into the environment.
     load_dotenv()
 
-    print(os.environ.get("OFFLINE_AI_BASE_URL"))
-
     # __________________________________________________________________________
 
     information: str = """
@@ -102,6 +100,25 @@ def main():
 
     # __________________________________________________________________________
 
+    # The paramater `temperature` controls how deterministic the responses
+    # from the AI will be. The response of an AI model will never be fully
+    # deterministic but the `temperature` parameter can help
+    # to control things.
+
+    # Values between 0 and 0.3 will make the response more deterministic.
+    # Values between 0.8 and 1 will result in more creative responses.
+
+    llm = ChatOllama(
+        temperature=0,
+        model="llama3.2:3b",
+        base_url=os.getenv("OFFLINE_AI_BASE_URL"),
+    )
+
+    chain = summary_prompt_template | llm
+
+    response = chain.invoke(input={"information": information})
+
+    print(response.content)
 
 if __name__ == "__main__":
     main()
