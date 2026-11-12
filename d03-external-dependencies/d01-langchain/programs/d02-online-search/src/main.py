@@ -1,6 +1,6 @@
 # SECTION: Standard Library Imports
 
-# import os
+import os
 
 # ______________________________________________________________________________
 
@@ -30,10 +30,11 @@ from langchain_ollama import ChatOllama
 
 # STEP: 1 => Create a search function
 
+
 # `@tool` is a Python decorator that turns a regular Python function into
 # a LangChain `tool`. In LangChain, a `tool` is a function that can be used
 # by an `AI Agent` to perform actions such as API calls,
-# reading from a database etc. 
+# reading from a database etc.
 @tool
 def search_internet(query: str) -> str:
     """
@@ -48,8 +49,8 @@ def search_internet(query: str) -> str:
     print(f"Searching for {query}")
     return "Tokyo weather is sunny"
 
+
 def main():
-    search_internet("Tokyo")
 
     # __________________________________________________________________________
 
@@ -61,10 +62,22 @@ def main():
 
     # __________________________________________________________________________
 
-    # STEP: 3 => Add the llm to the program
+    # STEP: 3 => Add the LLM to the program
 
-    llm = ChatOllama()
+    llm = ChatOllama(
+        temperature=0,
+        model="llama3.2:3b",
+        base_url=os.getenv("OFFLINE_AI_BASE_URL"),
+    )
 
+    # A list of tools that can be used by the LLM
+    tools = [search_internet]
+
+    agent = create_agent(model=llm, tools=tools)
+
+    result = agent.invoke({"messages":HumanMessage(content="What is the weather in Tokyo")})
+
+    print(result)
 
     # __________________________________________________________________________
 
