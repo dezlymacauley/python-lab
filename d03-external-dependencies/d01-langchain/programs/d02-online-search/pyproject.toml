@@ -1,0 +1,20 @@
+[project]
+name = "d02-online-search"
+version = "0.1.0"
+requires-python = ">=3.15.2"
+dependencies = [
+    # For working with `.env` files
+    "python-dotenv>=1.2.4",
+
+    # A framework for builing AI-powered applications
+    "langchain>=1.4.10",
+
+    # For using LangChain with Ollama
+    "langchain-ollama>=1.1.0",
+
+    # For giving the agent web search capabilities
+    "langchain-tavily>=0.2.18",
+
+    # The Tavily SDK
+    "tavily-python>=0.8.5",
+]
