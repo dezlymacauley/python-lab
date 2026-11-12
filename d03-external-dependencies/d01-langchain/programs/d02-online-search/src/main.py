@@ -6,7 +6,6 @@ import os
 
 # SECTION: External Dependencies
 
-from re import search
 from dotenv import load_dotenv
 
 from langchain.agents import create_agent
@@ -75,9 +74,14 @@ def main():
 
     agent = create_agent(model=llm, tools=tools)
 
-    result = agent.invoke({"messages":HumanMessage(content="What is the weather in Tokyo")})
+    result = agent.invoke(
+        # HumanMessage is a LangChain class that represents 
+        # a message sent by a human to an AI model.
+        {"messages": [HumanMessage(content="What is the weather in Tokyo")]}
+    )
 
-    print(result)
+    # print(result)
+    print(result["messages"][-1].content)
 
     # __________________________________________________________________________
 
