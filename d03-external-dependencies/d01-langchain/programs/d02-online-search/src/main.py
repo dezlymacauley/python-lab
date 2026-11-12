@@ -21,9 +21,13 @@ from langchain_core.messages import HumanMessage
 
 from langchain_ollama import ChatOllama
 
+from tavily import TavilyClient
+
 # from langchain_core.prompts import PromptTemplate
-#
-# from langchain_ollama import ChatOllama
+
+# ______________________________________________________________________________
+
+tavily = TavilyClient()
 
 # ______________________________________________________________________________
 
@@ -35,7 +39,7 @@ from langchain_ollama import ChatOllama
 # by an `AI Agent` to perform actions such as API calls,
 # reading from a database etc.
 @tool
-def search_internet(query: str) -> str:
+def search_internet(query: str) -> dict:
     """
     Search the internet
 
@@ -46,7 +50,9 @@ def search_internet(query: str) -> str:
         A string that contains the results
     """
     print(f"Searching for {query}")
-    return "Tokyo weather is sunny"
+
+    result = tavily.search(query=query)
+    return result
 
 
 def main():
@@ -80,8 +86,8 @@ def main():
         {"messages": [HumanMessage(content="What is the weather in Tokyo")]}
     )
 
-    # print(result)
-    print(result["messages"][-1].content)
+    print(result)
+    # print(result["messages"][-1].content)
 
     # __________________________________________________________________________
 
