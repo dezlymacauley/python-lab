@@ -1,0 +1,12 @@
+# Project Dependencies
+.venv/
+
+# Code Formatter Cache
+.ruff_cache/ 
+
+# Python Module Bytecode Cache
+__pycache__/
+
+# Environment Variables
+.env*
+!.env_example

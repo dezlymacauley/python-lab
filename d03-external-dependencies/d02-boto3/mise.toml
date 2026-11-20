@@ -1,0 +1,72 @@
+[env]
+WORKSPACE_PYTHON_VERSION = "3.15.2" 
+#______________________________________________________________________________
+
+[tools]
+eza = "latest"
+ruff = "latest"
+uv = "latest"
+#______________________________________________________________________________
+
+[settings]
+python.uv_venv_auto = "source"
+#______________________________________________________________________________
+
+[tasks.clean]
+description = "🧼 Delete cache and dependencies | alias = clean"
+quiet = true
+run = """
+
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+
+"""
+#______________________________________________________________________________
+
+[tasks.format]
+description = "📜 Run the code formatter on the project | alias = format"
+quiet = true
+run = """
+
+ruff format .
+
+"""
+#______________________________________________________________________________
+
+[tasks.setup]
+description = "🚀 Setup the project | alias = setup"
+quiet = true
+run = """
+
+# Ensure that this is a clean build of the virtual environment
+rm -rf __pycache__
+rm -rf .ruff_cache
+rm -rf .venv
+
+# Rebuild the the virtual environment and install the dependencies
+uv sync
+cd ..
+cd -
+
+"""
+#______________________________________________________________________________
+
+[tasks.structure]
+description = "🌲 View the project structure | alias = structure"
+quiet = true
+run = """
+
+eza --tree --git-ignore --all
+
+"""
+#______________________________________________________________________________
+
+[shell_alias]
+clean = "mise run clean"
+format = "mise run format"
+menu = "echo; mise tasks; echo; mise shell-alias ls; echo"
+run = "python src/main.py"
+setup = "mise run setup"
+tree = "mise run structure"
+#______________________________________________________________________________

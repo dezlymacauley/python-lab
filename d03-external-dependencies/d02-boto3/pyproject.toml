@@ -1,0 +1,10 @@
+[project]
+name = "d02-boto3"
+version = "0.1.0"
+requires-python = ">=3.15.2"
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["programs/*"]

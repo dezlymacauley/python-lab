@@ -1,0 +1,19 @@
+version = 1
+revision = 5
+requires-python = ">=3.15.2"
+
+[manifest]
+members = [
+    "d01",
+    "d02-boto3",
+]
+
+[[package]]
+name = "d01"
+version = "0.1.0"
+source = { virtual = "programs/d01" }
+
+[[package]]
+name = "d02-boto3"
+version = "0.1.0"
+source = { virtual = "." }
